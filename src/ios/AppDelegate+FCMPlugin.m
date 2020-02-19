@@ -152,9 +152,9 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     // Short-circuit when actually running iOS 10+, let notification centre methods handle the notification.
-    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_x_Max) {
-        return;
-    }
+    //if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_x_Max) {
+    //    return;
+	//}
     
     NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
     
@@ -193,9 +193,9 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     // Short-circuit when actually running iOS 10+, let notification centre methods handle the notification.
-    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_x_Max) {
-        return;
-    }
+    //if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_x_Max) {
+    //    return;
+    //}
     
     // If you are receiving a notification message while your app is in the background,
     // this callback will not be fired till the user taps on the notification launching the application.
@@ -219,13 +219,15 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
         || application.applicationState == UIApplicationStateInactive) {
         [userInfoMutable setValue:@(NO) forKey:@"wasTapped"];
         NSLog(@"app active");
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfoMutable
-                                                           options:0
-                                                             error:&error];
-        [FCMPlugin.fcmPlugin notifyOfMessage:jsonData];
+	}
+		
+	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfoMutable
+													   options:0
+														 error:&error];
+	[FCMPlugin.fcmPlugin notifyOfMessage:jsonData];
         
         // app is in background
-    }
+    //}
     
     completionHandler(UIBackgroundFetchResultNoData);
 }
