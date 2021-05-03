@@ -47,3 +47,11 @@ Temporary Items
 .apdisk
 
 npm-debug.log
+
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.vscode/
+npm-debug.log*
+
+.idea/
